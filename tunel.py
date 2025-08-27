@@ -98,11 +98,12 @@ class GameEngine:
                     xxx1=(xn2-xn1)/16
                     yy1=(y2-y1)/16
                     yyy1=(yn2-yn1)/16
-                    print("####")
+                    
                     for nn in range(0,16):
                         
                         c.create_line(x1+int(xx1*float(nn))+xx1*(counter*0.5),y1,xn1+int(xxx1*float(nn))+xxx1*(counter*0.5),yn1, width=max(1, self.line_width-1), fill="black")
                         c.create_line(x1+int(xx1*float(nn))+xx1*(counter*0.5),y2,xn1+int(xxx1*float(nn))+xxx1*(counter*0.5),yn2, width=max(1, self.line_width-1), fill="black")
+                        c.create_line(x1,y1+int(yy1*float(nn))+yy1*(counter*0.5),xn1,yn1+int(yyy1*float(nn))+yyy1*(counter*0.5), width=max(1, self.line_width-1), fill="black")
                          
                 counter=counter+1
                 

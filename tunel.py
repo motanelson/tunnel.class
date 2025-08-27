@@ -102,6 +102,7 @@ class GameEngine:
                     for nn in range(0,16):
                         
                         c.create_line(x1+int(xx1*float(nn))+xx1*(counter*0.5),y1,xn1+int(xxx1*float(nn))+xxx1*(counter*0.5),yn1, width=max(1, self.line_width-1), fill="black")
+                        c.create_line(x1+int(xx1*float(nn))+xx1*(counter*0.5),y2,xn1+int(xxx1*float(nn))+xxx1*(counter*0.5),yn2, width=max(1, self.line_width-1), fill="black")
                          
                 counter=counter+1
                 

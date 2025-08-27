@@ -63,21 +63,7 @@ class GameEngine:
                 break
         return frames
 
-    @staticmethod
-    def _lerp(a: Point, b: Point, t: float) -> Point:
-        return (a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t)
-
-    def _draw_running_bond_on_wall(self, p1a: Point, p1b: Point, p2a: Point, p2b: Point, t_phase: float):
-        """
-        Desenha uma 'fiada' vertical de tijolos numa parede trapezoidal entre duas frames consecutivas.
-        p1a--p1b: aresta mais próxima; p2a--p2b: aresta seguinte (mais longe, mais pequena).
-        O padrão alterna ('running bond') usando t_phase.
-        """
-        # linha vertical de junta (mortar) que atravessa a parede entre as duas frames
-        a = self._lerp(p1a, p1b, t_phase)
-        b = self._lerp(p2a, p2b, t_phase)
-        self.canvas.create_line(a[0], a[1], b[0], b[1], width=max(1, self.line_width-1), fill="black")
-
+      
     def redraws(self):
         """Refaz todo o desenho (linhas pretas sobre janela amarela)."""
         c = self.canvas
@@ -108,14 +94,14 @@ class GameEngine:
             for k in range(1, cols + 1):
                 u = ((k / (cols + 1)) + t) % 1.0
             t = (t + 0.18) % 1.0
+        for tt in range(0,w,64):
+            c.create_line(tt, 0, w/2, h/2, width=max(1, self.line_width-1), fill="black")
         for tt in range(0,900,64):
-            c.create_line(tt, 0, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
-        for tt in range(0,900,64):
-            c.create_line(tt, 600, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
+            c.create_line(tt, h, w/2, h/2, width=max(1, self.line_width-1), fill="black")
         for tt in range(0,600,64):
-            c.create_line(0, tt, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
+            c.create_line(0, tt, w/2, h/2, width=max(1, self.line_width-1), fill="black")
         for tt in range(0,600,64):
-            c.create_line(900, tt, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
+            c.create_line(w, tt, w/2, h/2, width=max(1, self.line_width-1), fill="black")
 
             
 

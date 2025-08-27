@@ -100,18 +100,24 @@ class GameEngine:
         # Para sugerir tijolos reais nas paredes, desenhamos juntas verticais
         # que seguem um padrão deslocado (running bond) e tornam-se mais densas em profundidade.
         t = self.running_bond_offset
-        for i in range(len(frames) - 1):
+        for i in range(len(frames) - 1-150):
             x1, y1, x2, y2 = frames[i]
             xn1, yn1, xn2, yn2 = frames[i + 1]
 
             cols = max(1, int(2 + i * 0.15))
             for k in range(1, cols + 1):
                 u = ((k / (cols + 1)) + t) % 1.0
-            c.create_line(0, 0, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
-            c.create_line(900, 0, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
-            c.create_line(0, 600, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
-            c.create_line(900, 600, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
             t = (t + 0.18) % 1.0
+        for tt in range(0,900,64):
+            c.create_line(tt, 0, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
+        for tt in range(0,900,64):
+            c.create_line(tt, 600, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
+        for tt in range(0,600,64):
+            c.create_line(0, tt, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
+        for tt in range(0,600,64):
+            c.create_line(900, tt, 900/2, 600/2, width=max(1, self.line_width-1), fill="black")
+
+            
 
 def main():
     root = tk.Tk()

@@ -81,19 +81,31 @@ class GameEngine:
         # Desenhar os 'anéis' (as juntas horizontais do teto/chão e convergência das paredes)
         for rect in frames:
             x1, y1, x2, y2 = rect
-            c.create_rectangle(x1, y1, x2, y2, outline="black", width=self.line_width)
+            if x2 -x1 > 50.0 and y2-y1>50.0:
+                
+                c.create_rectangle(x1, y1, x2, y2, outline="black", width=self.line_width)
 
         # Para sugerir tijolos reais nas paredes, desenhamos juntas verticais
         # que seguem um padrão deslocado (running bond) e tornam-se mais densas em profundidade.
         t = self.running_bond_offset
-        for i in range(len(frames) - 1-150):
-            x1, y1, x2, y2 = frames[i]
-            xn1, yn1, xn2, yn2 = frames[i + 1]
-
-            cols = max(1, int(2 + i * 0.15))
-            for k in range(1, cols + 1):
-                u = ((k / (cols + 1)) + t) % 1.0
-            t = (t + 0.18) % 1.0
+        counter=0;
+        for i in range(len(frames) - 1):
+                counter= counter % 2
+                x1, y1, x2, y2 = frames[i]
+                xn1, yn1, xn2, yn2 = frames[i + 1]
+                if x2 -x1 > 50.0 and y2-y1>50.0:
+                    xx1=(x2-x1)/16
+                    xxx1=(xn2-xn1)/16
+                    yy1=(y2-y1)/16
+                    yyy1=(yn2-yn1)/16
+                    print("####")
+                    for nn in range(0,16):
+                        
+                        c.create_line(x1+int(xx1*float(nn))+xx1*(counter*0.5),y1,xn1+int(xxx1*float(nn))+xxx1*(counter*0.5),yn1, width=max(1, self.line_width-1), fill="black")
+                         
+                counter=counter+1
+                
+        """
         for tt in range(0,w,64):
             c.create_line(tt, 0, w/2, h/2, width=max(1, self.line_width-1), fill="black")
         for tt in range(0,900,64):
@@ -102,7 +114,7 @@ class GameEngine:
             c.create_line(0, tt, w/2, h/2, width=max(1, self.line_width-1), fill="black")
         for tt in range(0,600,64):
             c.create_line(w, tt, w/2, h/2, width=max(1, self.line_width-1), fill="black")
-
+        """
             
 
 def main():
